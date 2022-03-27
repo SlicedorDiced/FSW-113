@@ -18,3 +18,5 @@ for (let x = 0; x < cities.length; x++) {
 }
 
 tempList += '</ul>'
+
+document.body.innerHTML = tempList

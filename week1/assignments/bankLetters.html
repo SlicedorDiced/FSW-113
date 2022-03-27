@@ -3,11 +3,18 @@
     <head>
         <title></title>
         <style>
+            html{
+                background-color: black;
+            }
+            *{
+                box-sizing: border-box;
+            }
             .letter {
                 margin: 0 auto;
                 width: 400px;
                 border: black 1px solid;
                 padding: 10px;
+                background-color: rgb(83, 198, 202);
             }
         </style>
     </head>
@@ -30,6 +37,18 @@
             { fname: 'Petra', balance: 500.35, rate: 4.9 },
             { fname: 'Reggie', balance: 0, rate: 7.2 }
         ]
+
+        for(i=0; i < customers.length; i++) {
+            if (customers[i].balance < 0) {
+                document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Because you are such a great customer, we're lowering your interest rate to ${customers[i].rate}%. </div>`
+            }
+            else if (customers[i].balance > 0) {
+                document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  this is an attempt to collect a debt to ${bankName}. Your account is past due by the amount of ${customers[i].balance} </div>`
+            }
+            else {
+                document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Your balance is current. No need for action until next month. </div>`
+            }
+        };
         // Create a loop that iterates through the customers array. Based on the customer's balance, create a personalized copy 
         // of the appropriate letter text from below. Each letter should be contained within a div with the style of 'letter'.
 

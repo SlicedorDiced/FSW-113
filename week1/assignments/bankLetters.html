@@ -38,17 +38,85 @@
             { fname: 'Reggie', balance: 0, rate: 7.2 }
         ]
 
+        // this is a way of doing it, but here we query the dom every time we go through and is a performance issue.
+
+
+        // for(i=0; i < customers.length; i++) {
+        //     if (customers[i].balance < 0) {
+        //         document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Because you are such a great customer, we're lowering your interest rate to ${customers[i].rate}%. </div>`
+        //     }
+        //     else if (customers[i].balance > 0) {
+        //         document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  this is an attempt to collect a debt to ${bankName}. Your account is past due by the amount of ${customers[i].balance} </div>`
+        //     }
+        //     else {
+        //         document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Your balance is current. No need for action until next month. </div>`
+        //     }
+        // };
+
+
+
+        // here we only query the dom one time, we make that div we query into a variable thats easily accesible. we could reference it once in the dom and then after just reference to memory [the place value the query has given the selected element] theres a trade off
+        // is taking a small amount of memory in order to store the query element selected. when we assign this variable we take a small amount of memory to store the memory address where we store the element in this case the div we query we sacrife memory for performance.
+        // this is just 10 customers imagine running this for loop 10 million times
+
+
+        // letterDiv = document.querySelector('#letterDiv')
+        // for(i=0; i < customers.length; i++) {
+        //     if (customers[i].balance < 0) {
+        //         letterDiv.innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Because you are such a great customer, we're lowering your interest rate to ${customers[i].rate}%. </div>`
+        //     }
+        //     else if (customers[i].balance > 0) {
+        //         letterDiv.innerHTML += `<div class="letter"> Hello ${customers[i].fname},  this is an attempt to collect a debt to ${bankName}. Your account is past due by the amount of ${customers[i].balance} </div>`
+        //     }
+        //     else {
+        //         letterDiv.innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Your balance is current. No need for action until next month. </div>`
+        //     }
+        // };
+
+
+        // another way we could possible execute this loop in a more efficient way with out having to create and reparse new ( div ) dom nodes and keep re creating new nodes for every item from the array being looped. This happens since for each condition for each item in the array
+        // we are actually creating new item node and re parsing whole html with (.innerHTML).
+        // we could approach this a even more efficient way. in terms of code we could come in for our FOR LOOP by CREATING a new div that we manipulate WITHIN the loop to after then append all iterated items with their inloop created div to the doms already existing html div,
+        // and reparse all changes all at once instad of one by one
+
+        // letterDiv = document.querySelector('#letterDiv')
+        // for(i=0; i < customers.length; i++) {
+        //     newDiv = document.createElement('div');
+        //     // newDiv.className ='letter' // this has been commented out, there is a extra space that pops out at the bottom figure it out why.
+        //     if (customers[i].balance < 0) {
+        //         letterDiv.innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Because you are such a great customer, we're lowering your interest rate to ${customers[i].rate}%.</div>`
+        //     }
+        //     else if (customers[i].balance > 0) {
+        //         letterDiv.innerHTML += `<div class="letter"> Hello ${customers[i].fname},  this is an attempt to collect a debt to ${bankName}. Your account is past due by the amount of ${customers[i].balance}</div>`
+        //     }
+        //     else {
+        //         letterDiv.innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Your balance is current. No need for action until next month.</div>`
+        //     }
+        // };
+        // letterDiv.appendChild(newDiv)
+
+
+        // now we you insist in using the innerHTML there is a better performance wise manner 
+        // we use letterText to build the strings that was given to us, we then just set the .innerHTML once for all at once which is better performance as well. 
+
+
+    
         for(i=0; i < customers.length; i++) {
             if (customers[i].balance < 0) {
-                document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Because you are such a great customer, we're lowering your interest rate to ${customers[i].rate}%. </div>`
+                letterText += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Because you are such a great customer, we're lowering your interest rate to ${customers[i].rate}%. </div>`
             }
             else if (customers[i].balance > 0) {
-                document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  this is an attempt to collect a debt to ${bankName}. Your account is past due by the amount of ${customers[i].balance} </div>`
+                letterText += `<div class="letter"> Hello ${customers[i].fname},  this is an attempt to collect a debt to ${bankName}. Your account is past due by the amount of ${customers[i].balance} </div>`
             }
             else {
-                document.querySelector('#letterDiv').innerHTML += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Your balance is current. No need for action until next month. </div>`
+                letterText += `<div class="letter"> Hello ${customers[i].fname},  greetings from ${bankName}. Your balance is current. No need for action until next month. </div>`
             }
         };
+
+        document.querySelector('#letterDiv').innerHTML = letterText
+
+
+
         // Create a loop that iterates through the customers array. Based on the customer's balance, create a personalized copy 
         // of the appropriate letter text from below. Each letter should be contained within a div with the style of 'letter'.
 

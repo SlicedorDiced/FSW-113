@@ -12,5 +12,5 @@ const aryStates = ['Alabama',' Alaska',' American Samoa',' Arizona',' Arkansas',
 let objSelect = document.querySelector('#states')
 
 for (let x = 0; x < aryStates.length; x++) {
-    objSelect.options[x] = new Option(aryStates[x], x)
+    objSelect.options[x] = new Option(aryStates[x])
 }

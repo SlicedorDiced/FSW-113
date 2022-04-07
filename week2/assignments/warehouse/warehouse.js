@@ -21,48 +21,69 @@ const parts = [
     { partNbr: 'WEYPU3Z', partDescr: 'Mumpenflipper', aisle: 'E3', qty: 1}
 
 ]
-
-// list of each part number and qty for check-off in the "detailsList" element
-var detailList = document.querySelector('#detailsList');
-
-for (i=0; i < parts.length; i++) {
-    detailList.innerHTML += `<div class="items" ><input type="checkbox"></input>${parts[i].qty} (${parts[i].partNbr}) - ${parts[i].partDescr}<br></div>`
-};
+// list of each part number and qty for check-off in the "detailsList" element with forEach instead of for loop
+parts.forEach((item) => {
+    item = `<div class=items"><input type="checkbox"></input>${item.qty}  (${item.partNbr}) - ${item.partDescr}<br/></div>` 
+    document.querySelector('#detailsList').innerHTML += item
+});
 
 // if parts requiring special handling exist (in aisle B3), list of items needing 
 // special packaging in the "specialPackaging" element, else remove element
-for (i=0; i < parts.length; i++) {
-    if (parts[i].aisle == 'B3') {
-        document.querySelector('#specialPackaging').innerHTML += `<div id="specialpack" class="items"> Item: ${parts[i].partNbr} / Qty: ${parts[i].qty}</br></div>`
-    }
-};
-// if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
-// element and remind them to get gloves, else remove element
-for(i=0; i < parts.length; i++){
-    if (parts[i].aisle ==  'J4') {
-        document.querySelector('#hazardousMaterials').innerHTML += `<div id="hazardlist" class="items">Item: ${parts[i].partNbr} / Qty: ${parts[i].qty} </br> Get Gloves!</div>`
-    }
-};
+const specialPackaging = parts.filter((item) => {
+    return item.aisle === 'B3'
+})
+if (specialPackaging.length > 0) {
+    let specialLabel = 'Special Packaging required<br /><br /> '
+    specialPackaging.map((item) => {
+        specialLabel += `Item: ${item.partNbr} / Qty: ${item.qty}<br />`
+    })
+    document.querySelector('#specialPackaging').innerHTML = specialLabel
+} else document.querySelector('#specialPackaging').remove()
 
-// if all items in the order are small parts (aisle H1), then let employee know that they should take 
-// a basket and go dirctly to aisle H1
-for(i=0; i < parts.length; i++) {
-    if (parts[i].aisle == 'H1') {
-    document.querySelector('#smallItemsOnly').innerHTML += `<div class="items" id="smallitem">Item: ${parts[i].partNbr} / Qty: ${parts[i].qty} </br></div>`
-    }
-};
+// // if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
+// // element and remind them to get gloves, else remove element
+const hazardousMaterials = parts.filter((item) => {
+    return item.aisle === 'J4'
+})
+if (hazardousMaterials.length > 0) {
+    let hazardLabel = 'Hazardous Materials<br /><br /> '
+    // hazardousMaterials.map((item) => {
+    //     // hazardLabel += `Item: ${item.partNbr} / Qty: ${item.qty}<br /><br />`
+    // })
+    document.querySelector('#hazardousMaterials').innerHTML = hazardLabel + " Get Gloves"
+} 
 
-// if there are large items (anthing in aisles S, T, or U), then let the employee know in the "forkiftNeeded"
-// element that they will need to reserve a forklift, else remove the element
 
-for(i=0; i < parts.length; i++) {
-    if (parts[i].aisle == 'S', 'T', 'U') {
-    document.querySelector('#forkiftNeeded').innerHTML += `<div class="items" id="smallitem">Item: ${parts[i].partNbr} / Qty: ${parts[i].qty} </br></div>`
-    }
-};
-// sum up the total number of parts and append that number to the text already in "totalItems" element
-var sum = 0;
-for (i=0; i < parts.length; i++) {
-    sum +=parts[i].qty
-    document.querySelector('#totalItems').innerHTML += sum
-};
+// // if all items in the order are small parts (aisle H1), then let employee know that they should take 
+// // a basket and go dirctly to aisle H1
+const smallItems = parts.every((item) => {
+    return item.aisle === 'H1'
+})
+if (smallItems.length > 0) {
+    let smallLabel = 'Small Parts<br /><br /> '
+    // smallItems.map((item) => {
+    //     smallLabel += `Item: ${item.partNbr} / Qty: ${item.qty}<br /><br />`
+    // })
+    document.querySelector('#smallItemsOnly').innerHTML = smallLabel + "Grab a basket, and go directly to aisle H1"
+} else document.querySelector('#smallItemsOnly').remove()
+
+// // if there are large items (anthing in aisles S, T, or U), then let the employee know in the "forkiftNeeded"
+// // element that they will need to reserve a forklift, else remove the element
+const forklift = parts.some((item) => {
+    return item.aisle === 'S' || 'T' || 'U'
+})
+if (forklift.length > 0) {
+    let smallLabel = 'Forklift Needed<br /><br /> '
+    forklift.map((item) => {
+        smallLabel += `Item: ${item.partNbr} / Qty: ${item.qty}<br /><br />`
+    })
+    document.querySelector('#forkiftNeeded').innerHTML = smallLabel + "You will need to reserve a fork lift"
+} else document.querySelector('#forkiftNeeded').remove()
+
+// // sum up the total number of parts and append that number to the text already in "totalItems" element
+
+const totalPrice = parts.reduce((Total, item) => {
+    return item.qty + Total
+}, 0)
+
+document.querySelector('#totalItems').innerHTML += ` : ${totalPrice}`

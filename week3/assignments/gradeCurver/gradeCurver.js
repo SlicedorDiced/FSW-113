@@ -24,6 +24,12 @@ function applyBell(grade, index, ary) {
     }
 }
 
+    document.querySelector('#submit').addEventListener('click', curveGrades());
+    document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('#grades').value = "";
+        document.querySelector('#scores').value = "";
+    } );
+
 function convertArray(obj) {
     ary = obj.value.split(',')
     ary = ary.map(function (x) {
@@ -37,32 +43,28 @@ function convertArray(obj) {
 // separate lines of code into single lines. It currently has 18 lines of code. Without counting  
 // empty lines, can you get the number of lines down to 8?
 
-function curveGrades() {
-    **sum = function (accumulator, currentValue) {
-        return accumulator + currentValue
-    }
+const curveGrades = (accumulator, currentValue) => accumulator + currentValue
+    // **sum = function (accumulator, currentValue) {
+        //return accumulator + currentValue
+    //}
 
-    **sumGrades = function(array) {
-        return array.reduce(sum)
-    }
+    var sumGrades = (array) => array.reduce(sum)
 
-    **aryGrades = convertArray(document.querySelector('#scores'))
+    var aryGrades = convertArray(document.querySelector('scores'))
 
-    **minGrade = aryGrades.reduce(function(a, b) {
-        return Math.min(a, b)
-    })
-    
-    **maxGrade = aryGrades.reduce(function(a, b) {
-        return Math.max(a, b)
-    })
-    
-    **mean = sumGrades(aryGrades) / aryGrades.length
+    const minGrades = aryGrades.reduce( (a, b) => Math.min(a, b) )
 
-    **range = maxGrade - minGrade
+    const maxGrades = aryGrades.reduce( (a, b) => Math.max(a, b) )
+
+    var mean = sumGrades(aryGrades) / aryGrades.length
+
+    var range = maxGrades - minGrades
 
     gradeSlice = range / 5
 
-    aryGrades.forEach(applyBell)
+    aryGrades.forEaCH(applyBell)
 
     // write the value of aryGrades to the grades div in the HTML document
-}
+
+
+document.querySelector('grades').innerHTML += aryGrades.value

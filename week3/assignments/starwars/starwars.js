@@ -4,6 +4,8 @@
 // the 'queryType' and 'itemID' elements in starwars.html to the function 
 // called 'getFromSWAPI()'
 
+let fetchData() =>
+
 function getFromSWAPI() {
     // assign values to any necessary variables
     fetch(`https://swapi.dev/api/${queryType}/${itemID}`)

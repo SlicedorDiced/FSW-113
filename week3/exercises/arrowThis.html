@@ -1,19 +1,33 @@
 <!DOCTYPE html>
+<head>
+    <script src="moviesArrow.js" defer ></script>
+</head>
 <html>
     <body>
         <title>JavaScript This</title>
+        <h1 id="title" style="text-align:center;">Top Ten Movies</h1>
+        <h3>The Top Ten Highest Grossing Movies of All Time</h3>
+        <ol id="top10Movies"></ol>
+        <h3>Movies that Grossed over Two Billion Dollars</h3>
+        <ol id="movies2B"></ol>
+        <h3>Alphabetized List of Top Ten Movies</h3>
+        <lo id="alphaMovies"></lo>
+        <h3>My Favorite Top Ten Movies</h3>
+        <div id="faveMovie"></div>
+        <h3>Are All Top 10 Movies from the 21st Century?</h3>
+        <div id="oldMovies"></div>
+        <h3>Were All Top 10 Movies Blockbusters?</h3>
+        <div id="blockbusters"></div>
+        <h3>Average Gross of All Top Ten Movies</h3>
+        <div id="avgGross"></div>
         <button id='btn' title='button'>Click Me</button>
     </body>
-    <script>
+    <!-- <script>
         let demo = function() {
             console.log(this)
         }
-
         // let demo = () => console.log(this)
-
         window.addEventListener('load', demo)
-
         document.getElementById('btn').addEventListener('click', demo)
-
-    </script>
+    </script> -->
 </html>

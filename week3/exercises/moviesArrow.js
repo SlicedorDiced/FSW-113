@@ -109,28 +109,3 @@ function updateDOM(val, concat){
     if(concat) obj.innerHTML += val
     else obj.innerHTML = val
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Message Slackbot
-
-
-
-
-
-
-
-

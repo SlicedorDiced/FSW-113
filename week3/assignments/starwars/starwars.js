@@ -1,25 +1,19 @@
 // declare any necessary variables
-let dataLabel1 = document.querySelector('#dataLabel1');
-let dataValue1 = document.querySelector('#dataValue1');
-
-let dataLabel2 = document.querySelector('#dataLabel2');
-let dataValue2 = document.querySelector('#dataValue2');
 
 const queryType = document.querySelector('#queryType');
-const itemID = document.querySelector('#itemID');
 // define a function called 'fetchData()' that passes the values from 
 // the 'queryType' and 'itemID' elements in starwars.html to the function 
 // called 'getFromSWAPI()'
 
 function fetchData() {
-
-    getFromSWAPI()
+    const itemID = document.querySelector('#itemID');
+    getFromSWAPI(queryType.value, itemID.value) // passing values from querytype and itemid elemtns 
        
 }
 
-function getFromSWAPI() {
+function getFromSWAPI(queryType, itemID) {
     // assign values to any necessary variables 
-    fetch(`https://swapi.dev/api/${queryType.value}/${itemID.value}`)
+    fetch(`https://swapi.dev/api/${queryType}/${itemID}`)
     .then(function (response) {
         return response.json()
     })
@@ -31,13 +25,11 @@ function getFromSWAPI() {
     })
 }
 
-
 // create a new function called 'updateInfo()' that receives the data from 
 // the call to that function (see above). Use logic to write the appropriate
 //labels to 'dataLabel1' and 'dataLabel2' elements in starwars.html, as well
 // as the appropriate values from the data object to the 'dataValue1' and 
 // 'dataValue2' elements in starwars.html.
-
 
 
 updateInfo = responseJSON => { // this responseJSON is all the DATA being requested from the API endpoints
@@ -48,7 +40,15 @@ console.log(responseJSON);
 // console.log(dataLabel1); 
 // console.log(dataValue1);
 //console.log(keys)
+
 console.log(queryType.value)
+
+let dataLabel1 = document.querySelector('#dataLabel1');
+let dataValue1 = document.querySelector('#dataValue1');
+
+let dataLabel2 = document.querySelector('#dataLabel2');
+let dataValue2 = document.querySelector('#dataValue2');
+
     if (queryType.value == "people") {
         dataLabel1.textContent = "Name"
         dataValue1.textContent = responseJSON.name
@@ -71,6 +71,4 @@ console.log(queryType.value)
         dataValue2.textContent = responseJSON.crew
     }
 }
-
-
 // var inputValue = document.getElementById("myTextInputID").value;

@@ -33,7 +33,7 @@ class objCustomer {
 
     printPurchases() {
         let lstPurchases = `<div class='itemwrapper'>`
-        this.aryPurchases.forEach(element => {
+        this.aryPurchases.forEach(element => { // could be .map also like below with same result 
             lstPurchases += `<div class='itemcell'>${element.item}</div>`
             lstPurchases +=  `<div class='itemcell' style='text-align: right;'>$${element.price.toLocaleString()}</div>`
         })
@@ -44,7 +44,7 @@ class objCustomer {
  
     printPayments() {
         let lstPayments = `<div class='itemwrapper'>`
-        this.aryPayments.forEach(element => {
+        this.aryPayments.map(element => { // could also use .map actuallt changed this one to .map from .forEach
             lstPayments += `<div class='itemcell'>${element.date}</div>`
             lstPayments +=  `<div class='itemcell' style='text-align: right;'>$${element.payment.toLocaleString()}</div>`
         })

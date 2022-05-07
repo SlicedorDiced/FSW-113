@@ -30,14 +30,12 @@ function createStudent() {
     }
     
 
-
 // Create a function that fills in the student's name, class name, and calculated grade on the certificate .
    function fillCertificate() {
        document.querySelector('#certStudentName').textContent = student.studentName
        document.querySelector('#certClassName').textContent = student.className
        document.querySelector('#certGrade').textContent = student.gradeAverage()
        
-
    }
 
 // Create a function that converts the contents of a comma-separated text string to a numeric array.

@@ -45,26 +45,25 @@ class objStudent {
 
 // - a method that adds up all the student's scores
     sumStudentScores() {
-        let studentGrade = this.studentScores.reduce((counter, i) => {
-            return i.grade + counter
-        },
-        0)
+        let studentGrade = this.studentScores.reduce((total, grade) => grade + total , 0)
         return studentGrade
     }
 
 // - a method that adds up all the possible scores
-    sumAllScores(
-    ) {
-        let allScores = this.allPossibleScores.reduce((counter, i) => {
-            return i.allScores + counter
-        },
-        0)
+    sumAllScores() {
+        let allScores = this.allPossibleScores.reduce((total, grade) => grade + total , 0)
         return allScores
     }
 
 // - a method that calculates the student's letter grade (divide the student's score by the possible scores and use the resulting decimal to determine grade)
     gradeAverage() {
-        return this.sumStudentScores() / this.sumAllScores()
+        let gradePA = (this.sumStudentScores() / this.sumAllScores()) * 100
 
+        if (gradePA = 100) return 'A+'
+        if (gradePA >= 90) return 'A'
+        if (gradePA >= 80) return 'B'
+        if (gradePA >= 70) return 'C'
+        if (gradePA >= 60) return 'D'
+        if (gradePA <= 50) return 'F'
     } ;
 };

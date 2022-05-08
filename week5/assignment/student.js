@@ -59,7 +59,7 @@ class objStudent {
     gradeAverage() {
         let gradePA = (this.sumStudentScores() / this.sumAllScores()) * 100
 
-        if (gradePA = 100) return 'A+'
+        if (gradePA == 100) return 'A+'
         if (gradePA >= 90) return 'A'
         if (gradePA >= 80) return 'B'
         if (gradePA >= 70) return 'C'

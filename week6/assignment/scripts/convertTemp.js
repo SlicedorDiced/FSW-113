@@ -2,10 +2,10 @@
 // Depending on the location of the city, the function should return degrees in either fahrenheit or centigrade.
 export default function kelvinconverter(temp, country) {
     if(country == "US") {
-        return Math.round(1.8*(temp - 273) + 32) + " F"
+        return Math.round(1.8*(temp - 273) + 32) + " F°"
 
         } else 
-        return Math.round(temp - 273.15) + " C"
+        return Math.round(temp - 273.15) + " C°"
     };
 
 

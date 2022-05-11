@@ -38,7 +38,9 @@ let cityName = document.querySelector('#city')
 function writerWeatherData(data) {
    console.log(data)
     document.querySelector('#tempData').innerHTML = kelvinconverter(data.main.temp, data.sys.country)
-    document.querySelector('#humidData').innerHTML = data.main.humidity
-    document.querySelector('#conditionsData').innerHTML = data.weather
+    document.querySelector('#humidData').innerHTML = data.main.humidity + "%"
+    document.querySelector('#conditionsData').innerHTML = data.weather[0].description
+
+    backgroundWeather(data.sys, data.dt)
 
 }
